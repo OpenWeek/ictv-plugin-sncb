@@ -1,0 +1,8 @@
+plugin:
+    webapp: no
+    static: no
+    description: |
+        irail-fetch fetch data from the irail API to give information on trains schedules
+    dependencies:
+        - requests
+channels_params:
