@@ -6,3 +6,12 @@ plugin:
     dependencies:
         - requests
 channels_params:
+    departure_station:
+      name: 'Gare de depart'
+      type: 'string'
+      default: 'Louvain-la-Neuve'
+    duration:
+      name: 'Slide duration in seconds'
+      type: int
+      default: 10
+      min: 1
