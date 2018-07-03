@@ -11,6 +11,11 @@ channels_params:
       placeholder: ''
       type: 'string'
       default: 'Louvain-la-Neuve'
+    language:
+      name: 'Langue'
+      placeholder: ''
+      type: 'string'
+      default: 'fr'
     duration:
       name: 'Slide duration in seconds'
       placeholder: ''
