@@ -19,7 +19,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with ICTV.  If not, see <http://www.gnu.org/licenses/>.
 
-from ictv.model.channel import PluginChannel
+from ictv.models.channel import PluginChannel
 from ictv.plugin_manager.plugin_capsule import PluginCapsule
 from ictv.plugin_manager.plugin_manager import get_logger
 from ictv.plugin_manager.plugin_slide import PluginSlide
@@ -28,13 +28,14 @@ from ictv.plugin_manager.plugin_utils import MisconfiguredParameters
 def get_content(channel_id):
     channel = PluginChannel.get(channel_id)
     logger_extra = {'channel_name': channel.name, 'channel_id': channel.id}
-    logger = get_logger('i_like_trains',channel)
+    logger = get_logger('i_like_trains', channel)
     departure_station = channel.get_config_param('departure_station')
+    duration = channel.get_config_param('duration')
     if not departure_station:
         logger.warning('Problem with the departure station', extra=logger_extra)  #TODO Verifier gare existante
         return []
     else:
-        return None
+        return [ILikeTrainsCapsule(departure_station, duration)]
 
 class ILikeTrainsCapsule(PluginCapsule):
     def __init__(self, departure_station, duration):
@@ -52,10 +53,28 @@ class ILikeTrainsCapsule(PluginCapsule):
 
 
 class ILikeTrainsSlide(PluginSlide):
-    def __init__(self,departure_station, duration):
+    def __init__(self, departure_station, duration):
         self._departure_station = departure_station
         self._duration = duration
-        self._content = None #TODO HTML
+        self._content = {'text-1': {'text': """
+        <table style="width:100%">
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Eve</td>
+                <td>Jackson</td>
+                <td>94</td>
+            </tr>
+        </table>
+        """}, 'title-1': {'text': departure_station}, 'subtitle-1': {'text': ''}}
     def get_duration(self):
         return self._duration
     def get_content(self):
