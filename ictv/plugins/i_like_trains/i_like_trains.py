@@ -25,6 +25,7 @@ from ictv.plugin_manager.plugin_manager import get_logger
 from ictv.plugin_manager.plugin_slide import PluginSlide
 from ictv.plugin_manager.plugin_utils import MisconfiguredParameters
 
+
 def get_content(channel_id):
     channel = PluginChannel.get(channel_id)
     logger_extra = {'channel_name': channel.name, 'channel_id': channel.id}
@@ -37,50 +38,66 @@ def get_content(channel_id):
     else:
         return [ILikeTrainsCapsule(departure_station, duration)]
 
+
 class ILikeTrainsCapsule(PluginCapsule):
     def __init__(self, departure_station, duration):
         self._slides = [ILikeTrainsSlide(departure_station,duration)]
+        self._theme = 'train'
 
     def get_slides(self):
         return self._slides
 
     def get_theme(self):
-        return None
+        return self._theme
 
     def __repr__(self):
         return str(self.__dict__)
 
 
-
 class ILikeTrainsSlide(PluginSlide):
+
     def __init__(self, departure_station, duration):
         self._departure_station = departure_station
-        self._duration = duration
+        self._duration = duration #TODO Ajouter les heures
         self._content = {'text-1': {'text': """
+
         <table style="width:100%">
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Age</th>
+                <th>{}</td>
+                <th> </td>
+                <th> </td>
+                <th>{}</td>
+            <tr>
+                <th>Destination</th>
+                <th>Voie</th>
+                <th>Départ</th>
+                <th>Retard</th>
+            </tr>
+
+            <tr>
+                <td>Rome</td>
+                <td>42</td>
+                <td>13:55</td>
+                <td>+55</td>
             </tr>
             <tr>
-                <td>Jill</td>
-                <td>Smith</td>
-                <td>50</td>
-            </tr>
-            <tr>
-                <td>Eve</td>
-                <td>Jackson</td>
-                <td>94</td>
+                <td>Poudlard</td>
+                <td>9.75</td>
+                <td>9:30</td>
+                <td> </td>
             </tr>
         </table>
-        """}, 'title-1': {'text': departure_station}, 'subtitle-1': {'text': ''}}
+        """.format(departure_station, '12:00')}, 'title-1': {'text': ''}, 'subtitle-1': {'text': ''}}
+
     def get_duration(self):
         return self._duration
+
     def get_content(self):
         return self._content
+
     def get_template(self):
-        return 'template-text-center'
+        return 'template-train'
+
     def __repr__(self):
         return str(self.__dict__)
 
