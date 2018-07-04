@@ -2,7 +2,7 @@
     width:100%;
 }
 .train table,.train  th,.train  td {
-    border: 0px solid black;
+    border: none solid black;
     border-collapse: collapse;
 }
 .train th,.train  td {

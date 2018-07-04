@@ -23,3 +23,15 @@ channels_params:
       default: 10
       max: 120
       min: 1
+    nb_train:
+      name: 'Nombre de trains a afficher (8 par slide)'
+      placeholder: ''
+      type: int
+      default: 8
+      max: 50
+      min: 1
+    logo_1:
+      name: 'Logo principal'
+      placeholder: ''
+      type: 'string'
+      default: 'https://cdn.uclouvain.be/groups/cms-editors-presse/galerie-photos-ucl/logo/UCL_mention_pantone282.jpg'
