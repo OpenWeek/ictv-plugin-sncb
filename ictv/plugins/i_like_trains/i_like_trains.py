@@ -24,7 +24,9 @@ from ictv.plugin_manager.plugin_capsule import PluginCapsule
 from ictv.plugin_manager.plugin_manager import get_logger
 from ictv.plugin_manager.plugin_slide import PluginSlide
 from ictv.plugin_manager.plugin_utils import MisconfiguredParameters
-import urllib.request, urllib.error, urllib.parse
+import urllib.request
+import urllib.error
+import urllib.parse
 import requests
 import json
 import time
@@ -43,23 +45,15 @@ def get_content(channel_id):
     nb_train = channel.get_config_param('nb_train')
     logo_1 = channel.get_config_param('logo_1')
     if not departure_station:
-        logger.warning('Problem with the departure station', extra=logger_extra)  #TODO Verifier gare existante
+        logger.warning('Problem with the departure station', extra=logger_extra)
         return []
     else:
-        BASE_URL = "http://api.irail.be/"
-        URLS = {
-            'stations': 'stations',
-            'schedules': 'connections',
-            'liveboard': 'liveboard',
-            'vehicle': 'vehicle'
-        }
-
-        DEFAULT_ARGS = "?format=json"
+        base_url = "http://api.irail.be/"
         head = {'user-agent': 'ICTVbooyy/0.69 (ictv.github.con; ictv@4.life)'}
         payload = {'station': departure_station, 'arrdep': 'departures', 'lang': language, 'format': 'json',
                    'alert': 'true'}
 
-        r = requests.get(BASE_URL + 'liveboard/', params=payload, headers=head)
+        r = requests.get(base_url + 'liveboard/', params=payload, headers=head)
         parsed = json.loads(r.text)
         return [ILikeTrainsCapsule(departure_station, duration, language, nb_train, parsed, logo_1)]
 
@@ -86,7 +80,7 @@ class ILikeTrainsSlide(PluginSlide):
 
     def __init__(self, departure_station, duration,language, parsed, logo_1):
         self._departure_station = departure_station
-        self._duration = duration #TODO Ajouter les heures
+        self._duration = duration
 
         big_template = """$def with (parsed, actual, departure_station, language)
         <table>
@@ -150,7 +144,7 @@ class ILikeTrainsSlide(PluginSlide):
                          'title-1': {'text': ''},
                          'subtitle-1': {'text': ''},
                          'logo-1': {'src': logo_1},
-                         'logo-2': {'src': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/LogoBR.svg/1298px-LogoBR.svg.png'}}
+                         'logo-2': {'src':'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/LogoBR.svg/1298px-LogoBR.svg.png'}}
 
     def get_duration(self):
         return self._duration
