@@ -31,9 +31,5 @@ $var description: Full-width text for plugin SNCB
     $:title(content=slide, number=1, max_chars=25, editor_type="text", editor_placeholder="Title", editor_label="Title", editor_default="Title", editor_order="1")
     $:subtitle(content=slide, number=1, max_chars=130, editor_type="text", editor_placeholder="Subtitle", editor_label="Subtitle", editor_default="Subtitle", editor_order="2")
 
-    <div class="flex-container fill" style="display: flex; justify-content: space-around; align-items: center; width: 100%;">
-        <div class="flex-item" style="width: 100%;">
-            $:text(content=slide, number=1, style="width: 100%",max_chars=1000000, editor_type="textarea", editor_placeholder="Text", editor_label="Text", editor_default="Text", editor_order="3")
-        </div>
-    </div>
+    $:text(content=slide, number=1, style="width: 100%;", max_chars=1000000, editor_type="textarea", editor_placeholder="Text", editor_label="Text", editor_default="Text", editor_order="3")
 </div>
