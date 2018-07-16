@@ -23,10 +23,6 @@ from ictv.models.channel import PluginChannel
 from ictv.plugin_manager.plugin_capsule import PluginCapsule
 from ictv.plugin_manager.plugin_manager import get_logger
 from ictv.plugin_manager.plugin_slide import PluginSlide
-from ictv.plugin_manager.plugin_utils import MisconfiguredParameters
-import urllib.request
-import urllib.error
-import urllib.parse
 import requests
 import json
 import time
@@ -38,7 +34,7 @@ import math
 def get_content(channel_id):
     channel = PluginChannel.get(channel_id)
     logger_extra = {'channel_name': channel.name, 'channel_id': channel.id}
-    logger = get_logger('i_like_trains', channel)
+    logger = get_logger('sncb', channel)
     departure_station = channel.get_config_param('departure_station')
     duration = channel.get_config_param('duration')*1000
     language = channel.get_config_param('language')
@@ -49,22 +45,22 @@ def get_content(channel_id):
         return []
     else:
         base_url = "http://api.irail.be/"
-        head = {'user-agent': 'ICTVbooyy/0.69 (ictv.github.con; ictv@4.life)'}
+        head = {'user-agent': 'ictv-plugin-sncb (https://github.com/OpenWeek/ictv-plugin-survey)'}
         payload = {'station': departure_station, 'arrdep': 'departures', 'lang': language, 'format': 'json',
                    'alert': 'true'}
 
         r = requests.get(base_url + 'liveboard/', params=payload, headers=head)
         parsed = json.loads(r.text)
-        return [ILikeTrainsCapsule(departure_station, duration, language, nb_train, parsed, logo_1)]
+        return [SNCBCapsule(departure_station, duration, language, nb_train, parsed, logo_1)]
 
 
-class ILikeTrainsCapsule(PluginCapsule):
+class SNCBCapsule(PluginCapsule):
     def __init__(self, departure_station, duration, language, nb_train, parsed, logo_1):
         self._slides = []
         nb_page = math.ceil(nb_train/8)
         for page in range(nb_page):
-            self._slides.append(ILikeTrainsSlide(departure_station, duration, language, parsed['departures']['departure'][page*8 : min((page+1)*8, nb_train)], logo_1))
-        self._theme = 'train'
+            self._slides.append(SNCBSlide(departure_station, duration, language, parsed['departures']['departure'][page * 8 : min((page + 1) * 8, nb_train)], logo_1))
+        self._theme = 'sncb'
 
     def get_slides(self):
         return self._slides
@@ -76,7 +72,7 @@ class ILikeTrainsCapsule(PluginCapsule):
         return str(self.__dict__)
 
 
-class ILikeTrainsSlide(PluginSlide):
+class SNCBSlide(PluginSlide):
 
     def __init__(self, departure_station, duration,language, parsed, logo_1):
         self._departure_station = departure_station
@@ -153,7 +149,7 @@ class ILikeTrainsSlide(PluginSlide):
         return self._content
 
     def get_template(self):
-        return 'template-train'
+        return 'template-sncb'
 
     def __repr__(self):
         return str(self.__dict__)

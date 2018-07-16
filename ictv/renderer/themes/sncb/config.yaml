@@ -1,6 +1,6 @@
 css: yes
-name: train
-description: 'train is life'
+name: Plugin SNCB
+description: 'A custom theme for the plugin SNCB'
 parent: ~
 base_color:
   h: 0.597222222

@@ -1,0 +1,36 @@
+plugin:
+  webapp: no
+  static: no
+  description: 'A plugin that displays the real-time information provided by SNCB/NMBS.'
+  dependencies:
+    - requests
+channels_params:
+  departure_station:
+    name: 'Gare de depart'
+    placeholder: ''
+    type: 'string'
+    default: 'Louvain-la-Neuve'
+  language:
+    name: 'Langue'
+    placeholder: ''
+    type: 'string'
+    default: 'fr'
+  duration:
+    name: 'Slide duration in seconds'
+    placeholder: ''
+    type: int
+    default: 10
+    max: 120
+    min: 1
+  nb_train:
+    name: 'Nombre de trains a afficher (8 par slide)'
+    placeholder: ''
+    type: int
+    default: 8
+    max: 50
+    min: 1
+  logo_1:
+    name: 'Logo principal'
+    placeholder: ''
+    type: 'string'
+    default: 'https://cdn.uclouvain.be/groups/cms-editors-presse/galerie-photos-ucl/logo/UCL_mention_pantone282.jpg'
