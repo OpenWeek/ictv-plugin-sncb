@@ -104,7 +104,7 @@ class SNCBSlide(PluginSlide):
                 $else:
                     <th>Destination</th>
                     <th>Platform</th>
-                    <th>Depature</th>
+                    <th>Departure</th>
                     <th>Delay</th>
 
 
