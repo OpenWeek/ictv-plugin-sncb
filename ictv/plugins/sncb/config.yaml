@@ -6,12 +6,12 @@ plugin:
     - requests
 channels_params:
   departure_station:
-    name: 'Gare de depart'
+    name: 'Departure station'
     placeholder: ''
     type: 'string'
     default: 'Louvain-la-Neuve'
   language:
-    name: 'Langue'
+    name: 'Language (en, fr, nl or de)'
     placeholder: ''
     type: 'string'
     default: 'fr'
@@ -23,14 +23,14 @@ channels_params:
     max: 120
     min: 1
   nb_train:
-    name: 'Nombre de trains a afficher (8 par slide)'
+    name: 'Number of departures to show (8 by slide)'
     placeholder: ''
     type: int
     default: 8
     max: 50
     min: 1
   logo_1:
-    name: 'Logo principal'
+    name: 'Top left logo'
     placeholder: ''
     type: 'string'
     default: 'https://cdn.uclouvain.be/groups/cms-editors-presse/galerie-photos-ucl/logo/UCL_mention_pantone282.jpg'
