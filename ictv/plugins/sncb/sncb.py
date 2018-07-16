@@ -79,7 +79,7 @@ class SNCBSlide(PluginSlide):
         self._duration = duration
 
         big_template = """$def with (parsed, actual, departure_station, language)
-        <table>
+        <table style='width: 100%'>
             <tr>
                 <th>$departure_station</td>
                 <th> </td>

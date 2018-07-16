@@ -1,24 +1,20 @@
-.sncb table {
-    width:100%;
+.sncb table td {
+    border-bottom-color: inherit;
 }
-.sncb table,.sncb  th,.sncb  td {
-    border: none solid black;
-    border-collapse: collapse;
-}
-.sncb th,.sncb  td {
-    padding: 15px;
-    text-align: left;
-}
+
 .sncb table tr:nth-child(even) {
+    border-bottom-color: #abc8e2;
     background-color: #abc8e2;
     color: #135
 }
+
 .sncb table tr:nth-child(odd) {
-   background-color: #5F8CA3;
-   color: white
+    border-bottom-color: #5F8CA3;
+    background-color: #5F8CA3;
+    color: white
 }
 .sncb table td:nth-child(4) {
-   color: #DB2218;
+    color: #DB2218;
 }
 .sncb table th {
     background-color: white;
