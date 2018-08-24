@@ -84,7 +84,7 @@ class SNCBSlide(PluginSlide):
                 <th>$departure_station</td>
                 <th> </td>
                 <th> </td>
-                <th>$actual</td>
+                <th>Generated at $actual</td>
             <tr>
                 $if language=='fr':
                     <th>Destination</th>
@@ -137,8 +137,8 @@ class SNCBSlide(PluginSlide):
                                                                  datetime.datetime.now().strftime('%H:%M'),
                                                                  departure_station,
                                                                  language))},
-                         'title-1': {'text': ''},
-                         'subtitle-1': {'text': ''},
+                         'title-1': {'text': 'SNCB Departures'},
+                         'subtitle-1': {'text': departure_station},  # TODO: Localisation
                          'logo-1': {'src': logo_1},
                          'logo-2': {'src':'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/LogoBR.svg/1298px-LogoBR.svg.png'}}
 
