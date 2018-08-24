@@ -1,2 +1,2 @@
 include LICENSE.txt
-recursive-include ictv *.py *.yaml *.html
+recursive-include ictv *.py *.yaml *.html *.css
